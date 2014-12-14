@@ -1,20 +1,18 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../post-service/post-service.html">
 <link rel="import" href="../todo-item/todo-item.html">
 
-<polymer-element name="todo-list" attributes="">
+<polymer-element name="todo-list" attributes="todos">
     <template>
         <link rel="stylesheet" href="todo-list.css">
-        <post-service id="service" todos="{{todos}}">
-        </post-service>
+
         <div layout vertical center>
             <template repeat="{{todo in todos}}">
                 <todo-item>
                     <core-label horizontal layout>
-                        <paper-checkbox for checked="{{todo.status}}"></paper-checkbox>
+                        <paper-checkbox for checked="{{todo.status}}" on-tap="{{statusChanged}}" ></paper-checkbox>
                         <div vertical layout>
-                            <h4>{{todo.title}}</h4>
-                            <div>{{todo.description}}</div>
+                            <h4 class="{{todo.status ? 'text-strike' : 'text-normal'}}">{{todo.title}}</h4>
+                            <div>{{todo.notes}}</div>
                         </div>
                     </core-label>
                 </todo-item>
@@ -27,9 +25,16 @@
         (function() {
 
             Polymer({
-                // call back: polymer is ready
-                ready: function() {
-                    
+                statusChanged: function(event, detail, sender) {
+                    var todo = sender.templateInstance.model.todo;
+                    this.async(function() {
+                        this.todos.splice(this.todos.indexOf(todo), 1);
+                        if (todo.status) {
+                            this.todos.push(todo);
+                        } else {
+                            this.todos.splice(0, 0, todo);
+                        }
+                    }, null, 500);
                 }
             });
 

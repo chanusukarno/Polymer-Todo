@@ -6,17 +6,22 @@
         console.log('Polymer is ready to rock!');
     });
 
-    // add todo
+    // Menu actions
     var scope = document.querySelector('template[is=auto-binding]');
 
-    scope.toggleAdd = function(e) {
-        var d = document.querySelector('paper-action-dialog');
-        d.toggle();
+    scope.menuClearDone = function(e) {
+        for (var i = 0; i < scope.todos.length; i++) {
+            if (scope.todos[i].status) {
+                scope.todos.splice(i, scope.todos.length);
+            }
+        }
+        console.log('Clear Done! ' + scope.todos);
+
     };
-    
-    scope.addTodo = function(e) {
-        console.log(scope.todos);
-        console.log(scope.title + ", " + scope.notes);
+
+    scope.menuClearAll = function(e) {
+        scope.todos = [];
+        console.log('Clear All!');
     };
 
 // wrap document so it plays nice with other libraries

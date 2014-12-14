@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-action-dialog.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
+<polymer-element name="todo-new" attributes="todos">
+    <template>
+        <link rel="stylesheet" href="todo-new.scss">
+
+        <paper-action-dialog id="addDialog" heading="Add Todo" transition="core-transition-top">
+
+            <paper-input id="title" label="Title" value="{{todo.title}}" floatingLabel></paper-input>
+            <paper-input-decorator label="Notes" floatingLabel>
+                <paper-autogrow-textarea>
+                    <textarea rows="3" value="{{todo.notes}}"></textarea>
+                </paper-autogrow-textarea>
+            </paper-input-decorator>
+
+            <paper-button affirmative on-tap="{{cancelTodo}}">Cancel</paper-button>
+            <paper-button on-tap="{{addTodo}}" affirmative autofocus>Add</paper-button>
+        </paper-action-dialog>
+
+        <!-- Floating Add button -->
+        <paper-fab on-tap="{{toggleAdd}}" icon="add" title="add"></paper-fab>
+
+    </template>
+    <script>
+        (function() {
+
+            Polymer({
+                created: function() {
+                    this.todo = {};
+                },
+                toggleAdd: function(e) {
+                    this.$.addDialog.toggle();
+                },
+                addTodo: function(e) {
+                    console.log(JSON.stringify(this.todos));
+
+                    this.todo.status = false;
+                    this.todo.uid = this.todos.length + 1;
+
+                    // add current todo to the list
+                    this.todos.splice(0, 0, this.todo);
+
+                    console.log(JSON.stringify(this.todo));
+
+                    // once added: recycle
+                    this.todo = {};
+                },
+                cancelTodo: function() {
+                    this.title = undefined;
+                    this.notes = undefined;
+                }
+
+            });
+
+        })();
+    </script>
+</polymer-element>

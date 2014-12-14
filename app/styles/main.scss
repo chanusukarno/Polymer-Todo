@@ -21,18 +21,12 @@ core-toolbar {
     margin: 50px auto;
 }
 
-paper-fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+floating-btn {
+    display: none;
 }
 
-paper-input {
-    display: block;
-}
-
-paper-action-dialog {
-    padding: 0 130px 0 30px;
+paper-menu-button paper-item {
+    color: #000;
 }
 
 

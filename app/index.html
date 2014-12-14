@@ -30,46 +30,37 @@
 
     <body unresolved>
 
-    <template is="auto-binding"> 
+    <template is="auto-binding">
 
+        <!-- Todo's service -->
+        <post-service id="service" todos="{{todos}}">
+        </post-service>
+
+        <!-- Main panel with Header and content -->
         <core-header-panel mode="seamed" flex>
             <core-toolbar>
                 <div id="title" flex>Todo List</div>
 
                 <paper-menu-button id="menuBtn">
                     <paper-icon-button icon="more-vert"></paper-icon-button>
-                    <!--                <paper-dropdown class="dropdown" halign="right">
-                                        <core-menu class="menu">
-                                            <paper-item>Settings</paper-item>
-                                            <paper-item>Help</paper-item>
-                                            <paper-item>Feedback</paper-item>
-                                        </core-menu>
-                                    </paper-dropdown>-->
+                    <paper-dropdown class="dropdown" halign="right">
+                        <paper-item on-tap="{{menuClearDone}}">Clear Done</paper-item>
+                        <paper-item on-tap="{{menuClearAll}}">Clear All</paper-item>
+                        <paper-item>Settings</paper-item>
+                        <paper-item>Feedback</paper-item>
+                    </paper-dropdown>
                 </paper-menu-button>
             </core-toolbar>
 
             <!-- Main content goes here -->
             <div class="container" layout vertical center>
-                <todo-list></todo-list>
-                <!-- Add new Todo -->
-                <paper-action-dialog heading="Add Todo" transition="core-transition-top">
+                <!-- List all Todo's -->
+                <todo-list todos="{{todos}}"></todo-list>   
 
-                    <paper-input label="Title" value="{{title}}" floatingLabel></paper-input>
-                    <paper-input-decorator label="Notes" value="{{notes}}" floatingLabel>
-                        <paper-autogrow-textarea>
-                            <textarea rows="3"></textarea>
-                        </paper-autogrow-textarea>
-                    </paper-input-decorator>
-
-                    <paper-button affirmative>Cancel</paper-button>
-                    <paper-button on-tap="{{addTodo}}" affirmative autofocus>Add</paper-button>
-                </paper-action-dialog>
+                <!-- Add new Todo: Dialog-->
+                <todo-new todos="{{todos}}"></todo-new>
             </div>
-        </core-header-panel>
-
-        <button on-tap="{{toggleAdd}}">
-            <paper-fab icon="add" title="add"></paper-fab>
-        </button>
+        </core-header-panel>        
 
     </template>
 
