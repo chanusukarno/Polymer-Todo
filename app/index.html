@@ -41,8 +41,8 @@
             <core-toolbar>
                 <div id="title" flex>Todo List</div>
 
-                <paper-menu-button id="menuBtn">
-                    <paper-icon-button icon="more-vert"></paper-icon-button>
+                <paper-menu-button id="menuBtn" noink>
+                    <paper-icon-button icon="more-vert" noink></paper-icon-button>
                     <paper-dropdown class="dropdown" halign="right">
                         <paper-item on-tap="{{menuClearDone}}">Clear Done</paper-item>
                         <paper-item on-tap="{{menuClearAll}}">Clear All</paper-item>
@@ -50,6 +50,7 @@
                         <paper-item>Feedback</paper-item>
                     </paper-dropdown>
                 </paper-menu-button>
+
             </core-toolbar>
 
             <!-- Main content goes here -->
