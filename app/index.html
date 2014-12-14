@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Todo_Polymer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild-->
+
+        <!-- build:js bower_components/webcomponentsjs/webcomponents.min.js -->
+        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:vulcanized elements/elements.vulcanized.html -->
+        <link rel="import" href="elements/elements.html">
+        <!-- endbuild-->
+
+        <style shim-shadowdom>
+            html /deep/ [autofocus] {
+                color: #03a9f4;
+            }
+        </style>
+    </head>
+
+    <body unresolved>
+
+    <template is="auto-binding"> 
+
+        <core-header-panel mode="seamed" flex>
+            <core-toolbar>
+                <div id="title" flex>Todo List</div>
+
+                <paper-menu-button id="menuBtn">
+                    <paper-icon-button icon="more-vert"></paper-icon-button>
+                    <!--                <paper-dropdown class="dropdown" halign="right">
+                                        <core-menu class="menu">
+                                            <paper-item>Settings</paper-item>
+                                            <paper-item>Help</paper-item>
+                                            <paper-item>Feedback</paper-item>
+                                        </core-menu>
+                                    </paper-dropdown>-->
+                </paper-menu-button>
+            </core-toolbar>
+
+            <!-- Main content goes here -->
+            <div class="container" layout vertical center>
+                <todo-list></todo-list>
+                <!-- Add new Todo -->
+                <paper-action-dialog heading="Add Todo" transition="core-transition-top">
+
+                    <paper-input label="Title" value="{{title}}" floatingLabel></paper-input>
+                    <paper-input-decorator label="Notes" value="{{notes}}" floatingLabel>
+                        <paper-autogrow-textarea>
+                            <textarea rows="3"></textarea>
+                        </paper-autogrow-textarea>
+                    </paper-input-decorator>
+
+                    <paper-button affirmative>Cancel</paper-button>
+                    <paper-button on-tap="{{addTodo}}" affirmative autofocus>Add</paper-button>
+                </paper-action-dialog>
+            </div>
+        </core-header-panel>
+
+        <button on-tap="{{toggleAdd}}">
+            <paper-fab icon="add" title="add"></paper-fab>
+        </button>
+
+    </template>
+
+    <!-- build:js scripts/app.js -->
+    <script src="scripts/app.js"></script>
+    <!-- endbuild-->
+</body>
+
+</html>

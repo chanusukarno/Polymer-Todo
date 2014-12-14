@@ -1,0 +1,34 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="post-service" attributes="todos">
+    <template>
+        <style>
+            :host {
+                display: none;
+            }
+        </style>
+        <core-ajax id="ajax"
+                   auto
+                   url="../api/todos.json"
+                   on-core-response="{{todosLoaded}}"
+                   handleAs="json">
+        </core-ajax>
+    </template>
+    <script>
+        Polymer('post-service', {
+            created: function() {
+                this.todos = [];
+            },
+            todosLoaded: function() {
+                // Make a copy of the loaded data
+                console.log("TODO's: " + JSON.stringify(this.$.ajax.response));
+                this.todos = this.$.ajax.response.slice(0);
+            },
+            todoCompleted: function(uid, isCompleted) {
+                // no service backend, just log the change
+                console.log('Todo status changed: ' + uid + ", now: " + isCompleted);
+            }
+        });
+    </script>
+</polymer-element>

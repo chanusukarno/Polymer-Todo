@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../post-service/post-service.html">
+<link rel="import" href="../todo-item/todo-item.html">
+
+<polymer-element name="todo-list" attributes="">
+    <template>
+        <link rel="stylesheet" href="todo-list.css">
+        <post-service id="service" todos="{{todos}}">
+        </post-service>
+        <div layout vertical center>
+            <template repeat="{{todo in todos}}">
+                <todo-item>
+                    <core-label horizontal layout>
+                        <paper-checkbox for checked="{{todo.status}}"></paper-checkbox>
+                        <div vertical layout>
+                            <h4>{{todo.title}}</h4>
+                            <div>{{todo.description}}</div>
+                        </div>
+                    </core-label>
+                </todo-item>
+            </template>
+
+        </div>
+
+    </template>
+    <script>
+        (function() {
+
+            Polymer({
+                // call back: polymer is ready
+                ready: function() {
+                    
+                }
+            });
+
+        })();
+    </script>
+</polymer-element>
